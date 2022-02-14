@@ -11,9 +11,13 @@ const App = () => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Dialogs/>
+                <Route/>
+                <Route/>
+
+                {/*<Dialogs/>*/}
+                <Profile/>
             </div>
-            {/*<Profile/>*/}
+
         </div>
     );
 }
