@@ -9,7 +9,8 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         let text = newPostElements.current.value;
-        alert(text)
+        props.addPost(text);
+        newPostElements.current.value = ' ';
     }
     return (
         <div className={s.postsBlock}>
