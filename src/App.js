@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route, Switch} from "react-router-dom";
-import {updateNewPostText} from "./redux/state";
 
 const App = (props) => {
     return (
@@ -20,8 +19,7 @@ const App = (props) => {
                     <Route path='/profile'
                            render={() => <Profile
                                profilePage={props.state.profilePage}
-                               addPost={props.addPost}
-                               updateNewPostText={props.updateNewPostText}/>}/>
+                               dispatch={props.dispatch}/>}/>
                 </Switch>
             </div>
         </div>
