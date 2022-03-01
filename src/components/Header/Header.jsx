@@ -1,5 +1,5 @@
 import React from 'react';
-import fox from "../../assets/fox.png"
+import fox from "../../assets/imges/fox.png"
 import s from './Header.module.css'
 
 
