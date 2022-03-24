@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/imges/user.png";
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import usersReducer, {setCurrentPage} from "../../redux/users-reducer";
 
 let Users = (props) => {
+
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
