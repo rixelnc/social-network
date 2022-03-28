@@ -1,4 +1,5 @@
 import {usersAPI} from "../api/api";
+import actions from "redux-form/lib/actions";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -20,6 +21,8 @@ let initialState = {
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+        case  'FAKE':
+            return {...state, fake: state.fake + 1}
         case FOLLOW:
             return {
                 ...state,
@@ -72,7 +75,8 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 export const setUsersTotalCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalUsersCount});
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const toggleFollowingProgress = (isFetching, userId) => ({
-    type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
+    type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId
+});
 
 export const requestUsers = (page, pageSize) => {
     return (dispatch) => {
