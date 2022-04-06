@@ -4,7 +4,7 @@ import userPhoto from "../../assets/imges/user.png";
 import {NavLink} from "react-router-dom";
 import Paginator from "../common/Paginator/Paginator";
 
-let Users = (currentPage, totalUsersCount, pageSize, onPageChanged,users, ...props) => {
+let User = (currentPage, totalUsersCount, pageSize, onPageChanged,users, ...props) => {
 
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
 
@@ -13,12 +13,9 @@ let Users = (currentPage, totalUsersCount, pageSize, onPageChanged,users, ...pro
         if (i < 11) pages.push(i);
         if (i > pagesCount - 11) pages.push(i);
     }
-    return <div>
-        < Paginator currentPage={currentPage}
-                    onPageChanged={onPageChanged}
-                    totalUsersCount={totalUsersCount}/>
 
-        {users.map(u => ( <div key={u.id}>
+    return(
+    <div>
             {/*<span>*/}
             <div>
                 <NavLink to={'/profile/' + u.id}>
@@ -51,11 +48,10 @@ let Users = (currentPage, totalUsersCount, pageSize, onPageChanged,users, ...pro
             <div>{'u.location.city'}</div>
             {/*</span>*/}
             {/*</span>*/}
-        </div>
         ))
         }
     </div>
 }
+)
 
-
-export default Users;
+export default User;
