@@ -4,9 +4,14 @@ import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/imges/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     if (!profile) {
         return <Preloader/>
+    }
+    const onMainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
     }
 
     return (
@@ -14,6 +19,7 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
             <div>
                 <div className={s.descriptionBlock}>
                     <img className={s.userPhoto} src={profile.photos.large || userPhoto}/>
+                    {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 </div>
             </div>
