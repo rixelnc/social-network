@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "../../../assets/imges/user.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+
+    let [editMode, setEditMode] = useState(false)
     if (!profile) {
         return <Preloader/>
     }
@@ -18,9 +21,13 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         <div>
             <div>
                 <div className={s.descriptionBlock}>
-                    <img className={s.userPhoto} src={profile.photos.large || userPhoto}/>
+                    <img src={profile.photos.large || userPhoto} className={s.mainPhoto}/>
                     {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                    <ProfileData profile={profile}/>
+                    {editMode
+                        ? <ProfileDataForm profile={profile}/>
+                        : <ProfileData goToEditMode={() => {
+                            setEditMode(true)
+                        }} profile={profile} isOwner={isOwner}/>}
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                 </div>
             </div>
@@ -28,8 +35,11 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     )
 }
 
-const ProfileData = ({profile}) => {
+const ProfileData = ({profile, isOwner, goToEditMode}) => {
     return <div>
+        {isOwner && <div>
+            <button onClick={goToEditMode}>edit</button>
+        </div>}
         <div>
             <b>Full name</b>: {profile.fullName}
         </div>
@@ -39,19 +49,17 @@ const ProfileData = ({profile}) => {
         {profile.lookingForAJob &&
         <div>
             <b>My professional skills</b>: {profile.lookingForAJobDeckription}
-        </div>}
+        </div>
+        }
         <div>
             <b>About me</b>:{profile.aboutMe}
         </div>
         <div>
             <b>Contacts</b>:{Object.keys(profile.contacts).map(key => {
-            return (
-                <Contact contactTitle={key} contactValue={profile.contacts[key]}/>
-            )
+            return <Contact contactTitle={key} contactValue={profile.contacts[key]}/>
         })}
         </div>
     </div>
-
 }
 
 const Contact = ({contactTitle, contactValue}) => {
