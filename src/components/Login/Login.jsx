@@ -10,12 +10,12 @@ import style from "./../common/FormsControls/FormsControls.module.css"
 const LoginForm = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
-                {createField
-                ('Email', [required],'email',Input)}
-                {createField
-                ('Password', [required],'password',Input, {type:'password'})}
-                {createField
-                (null, null,'rememberMe',Input, {type:'checkbox'},'remember me')}
+            {createField
+            ('Email', [required], 'email', Input)}
+            {createField
+            ('Password', [required], 'password', Input, {type: 'password'})}
+            {createField
+            (null, null, 'rememberMe', Input, {type: 'checkbox'}, 'remember me')}
 
             {error && <div className={style.formSummaryError}>
                 {error}
@@ -34,7 +34,6 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         props.login(formData.email, formData.password, formData.rememberMe);
     }
-
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }

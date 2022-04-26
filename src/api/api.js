@@ -1,4 +1,5 @@
 import axios from "axios";
+import {saveProfile} from "../redux/profile-reducer";
 
 const instance = axios.create({
     withCredentials: true,
@@ -46,6 +47,9 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    saveProfile(profile) {
+        return instance.put(`profile`, profile)
     }
 }
 
